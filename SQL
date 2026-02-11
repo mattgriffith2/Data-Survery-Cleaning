@@ -42,3 +42,8 @@ bulk insert raw.survey_data
     ROWTERMINATOR = '\n',  -- Row delimiter
     TABLOCK                -- Improves performance
 );
+
+--create clean table
+select *
+INTO clean.survey_data
+FROM raw.survey_data
