@@ -43,7 +43,16 @@ bulk insert raw.survey_data
     TABLOCK                -- Improves performance
 );
 
+
 --create clean table
 select *
 INTO clean.survey_data
 FROM raw.survey_data
+
+/* Start cleaning table */
+
+-- remove the k in current_yearly_salary
+Update clean.survey_data
+set current_yearly_salary = Replace(current_yearly_salary,'k','000')
+where current_yearly_salary = current_yearly_salary
+
