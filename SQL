@@ -130,3 +130,24 @@ update clean.survey_data
 set fav_programming_lang = 'None'
 where fav_programming_lang like '%do not%'
 
+--standardize Excel related answers
+update clean.survey_data
+set fav_programming_lang = 'Excel'
+where fav_programming_lang like '%excel%'
+
+-- Create a new column for average of each salary range to use for analytics
+Alter Table clean.survey_data
+add current_yearly_salary_average int
+
+update clean.survey_data
+set current_yearly_salary_average = 
+	case
+		when current_yearly_salary = '0-40000' then (0+40000)/2
+		when current_yearly_salary = '106000-125000' then (106000+125000)/2
+		when current_yearly_salary = '125000-150000' then (125000+150000)/2
+		when current_yearly_salary = '150000-225000' then (150000+225000)/2
+		when current_yearly_salary = '41000-65000' then (41000+65000)/2
+		when current_yearly_salary = '66000-85000' then (66000+85000)/2
+		when current_yearly_salary = '86000-105000' then (86000+105000)/2
+		else 225000
+		end;
