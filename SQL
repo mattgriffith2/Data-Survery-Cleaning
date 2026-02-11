@@ -151,3 +151,25 @@ set current_yearly_salary_average =
 		when current_yearly_salary = '86000-105000' then (86000+105000)/2
 		else 225000
 		end;
+
+--Fixing countries lived in. 
+
+update clean.survey_data
+set country_lived_in = 'Nigeria'
+where country_lived_in like 'Africa (Nigeria)'
+
+update clean.survey_data
+set country_lived_in = 'Asia'
+where country_lived_in like 'Aisa'
+
+update clean.survey_data
+set country_lived_in = 'Portugal'
+where country_lived_in like 'Portug%'
+
+update clean.survey_data
+set country_lived_in = 'Peru'
+where country_lived_in like 'Per%'
+
+update clean.survey_data
+set country_lived_in = 'Ireland'
+where country_lived_in like 'Ire%'
