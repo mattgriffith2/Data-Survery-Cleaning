@@ -173,3 +173,16 @@ where country_lived_in like 'Per%'
 update clean.survey_data
 set country_lived_in = 'Ireland'
 where country_lived_in like 'Ire%'
+
+--Categorizing answers for Most important thing in a new Job
+update clean.survey_data
+set new_job_most_important_thing = trim(replace(cast(new_job_most_important_thing as varchar(50)),'Other (Please Specify):',''))
+from clean.survey_data
+
+update clean.survey_data
+set new_job_most_important_thing = 'Learning Opportunities'
+where new_job_most_important_thing like '%Learning%'
+
+update clean.survey_data
+set new_job_most_important_thing = 'Remote Work'
+where new_job_most_important_thing like '%Remote%'
